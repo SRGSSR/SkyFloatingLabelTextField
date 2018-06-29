@@ -49,7 +49,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
 
     /// A UIColor value that determines the text color of the editable text
     @IBInspectable
-    override dynamic open var textColor: UIColor? {
+    @objc override dynamic open var textColor: UIColor? {
         set {
             cachedTextColor = newValue
             updateControl(false)
@@ -60,7 +60,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A UIColor value that determines text color of the placeholder label
-    @IBInspectable dynamic open var placeholderColor: UIColor = UIColor.lightGray {
+    @IBInspectable @objc dynamic open var placeholderColor: UIColor = UIColor.lightGray {
         didSet {
             updatePlaceholder()
         }
@@ -101,49 +101,49 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A UIColor value that determines the text color of the title label when in the normal state
-    @IBInspectable dynamic open var titleColor: UIColor = .gray {
+    @IBInspectable @objc dynamic open var titleColor: UIColor = .gray {
         didSet {
             updateTitleColor()
         }
     }
 
     /// A UIColor value that determines the color of the bottom line when in the normal state
-    @IBInspectable dynamic open var lineColor: UIColor = .lightGray {
+    @IBInspectable @objc dynamic open var lineColor: UIColor = .lightGray {
         didSet {
             updateLineView()
         }
     }
 
     /// A UIColor value that determines the color used for the title label and line when the error message is not `nil`
-    @IBInspectable dynamic open var errorColor: UIColor = .red {
+    @IBInspectable @objc dynamic open var errorColor: UIColor = .red {
         didSet {
             updateColors()
         }
     }
 
     /// A UIColor value that determines the color used for the line when error message is not `nil`
-    @IBInspectable dynamic open var lineErrorColor: UIColor? {
+    @IBInspectable @objc dynamic open var lineErrorColor: UIColor? {
         didSet {
             updateColors()
         }
     }
     
     /// A UIColor value that determines the color used for the text when error message is not `nil`
-    @IBInspectable dynamic open var textErrorColor: UIColor? {
+    @IBInspectable @objc dynamic open var textErrorColor: UIColor? {
         didSet {
             updateColors()
         }
     }
     
     /// A UIColor value that determines the color used for the title label when error message is not `nil`
-    @IBInspectable dynamic open var titleErrorColor: UIColor? {
+    @IBInspectable @objc dynamic open var titleErrorColor: UIColor? {
         didSet {
             updateColors()
         }
     }
     
     /// A UIColor value that determines the color used for the title label and line when text field is disabled
-    @IBInspectable dynamic open var disabledColor: UIColor = UIColor(white: 0.88, alpha: 1.0) {
+    @IBInspectable @objc dynamic open var disabledColor: UIColor = UIColor(white: 0.88, alpha: 1.0) {
         didSet {
             updateControl()
             updatePlaceholder()
@@ -151,14 +151,14 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A UIColor value that determines the text color of the title label when editing
-    @IBInspectable dynamic open var selectedTitleColor: UIColor = .blue {
+    @IBInspectable @objc dynamic open var selectedTitleColor: UIColor = .blue {
         didSet {
             updateTitleColor()
         }
     }
 
     /// A UIColor value that determines the color of the line in a selected state
-    @IBInspectable dynamic open var selectedLineColor: UIColor = .black {
+    @IBInspectable @objc dynamic open var selectedLineColor: UIColor = .black {
         didSet {
             updateLineView()
         }
@@ -167,7 +167,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     // MARK: Line height
 
     /// A CGFloat value that determines the height for the bottom line when the control is in the normal state
-    @IBInspectable dynamic open var lineHeight: CGFloat = 0.5 {
+    @IBInspectable @objc dynamic open var lineHeight: CGFloat = 0.5 {
         didSet {
             updateLineView()
             setNeedsDisplay()
@@ -175,7 +175,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A CGFloat value that determines the height for the bottom line when the control is in a selected state
-    @IBInspectable dynamic open var selectedLineHeight: CGFloat = 1.0 {
+    @IBInspectable @objc dynamic open var selectedLineHeight: CGFloat = 1.0 {
         didSet {
             updateLineView()
             setNeedsDisplay()
@@ -185,10 +185,10 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     // MARK: View components
 
     /// The internal `UIView` to display the line below the text input.
-    open var lineView: UIView!
+    @objc open var lineView: UIView!
 
     /// The internal `UILabel` that displays the selected, deselected title or error message based on the current state.
-    open var titleLabel: UILabel!
+    @objc open var titleLabel: UILabel!
 
     // MARK: Properties
 
@@ -197,7 +197,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     This can be the `title`, `selectedTitle` or the `errorMessage`.
     The default implementation converts the text to uppercase.
     */
-    open var titleFormatter: ((String) -> String) = { (text: String) -> String in
+    @objc open var titleFormatter: ((String) -> String) = { (text: String) -> String in
         if #available(iOS 9.0, *) {
             return text.localizedUppercase
         } else {
@@ -219,7 +219,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A String value for the error message to display.
-    open var errorMessage: String? {
+    @objc open var errorMessage: String? {
         didSet {
             updateControl(true)
         }
@@ -232,7 +232,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
      A Boolean value that determines whether the receiver is highlighted.
      When changing this value, highlighting will be done with animation
      */
-    override open var isHighlighted: Bool {
+    @objc override open var isHighlighted: Bool {
         get {
             return _highlighted
         }
@@ -244,7 +244,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// A Boolean value that determines whether the textfield is being edited or is selected.
-    open var editingOrSelected: Bool {
+    @objc open var editingOrSelected: Bool {
         return super.isEditing || isSelected
     }
 
@@ -257,7 +257,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
 
     /// The text content of the textfield
     @IBInspectable
-    override open var text: String? {
+    @objc override open var text: String? {
         didSet {
             updateControl(false)
         }
@@ -268,7 +268,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
      The placeholder can also appear in the title label when both `title` `selectedTitle` and are `nil`.
      */
     @IBInspectable
-    override open var placeholder: String? {
+    @objc override open var placeholder: String? {
         didSet {
             setNeedsDisplay()
             updatePlaceholder()
@@ -277,21 +277,21 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// The String to display when the textfield is editing and the input is not empty.
-    @IBInspectable open var selectedTitle: String? {
+    @IBInspectable @objc open var selectedTitle: String? {
         didSet {
             updateControl()
         }
     }
 
     /// The String to display when the textfield is not editing and the input is not empty.
-    @IBInspectable open var title: String? {
+    @IBInspectable @objc open var title: String? {
         didSet {
             updateControl()
         }
     }
 
     // Determines whether the field is selected. When selected, the title floats above the textbox.
-    open override var isSelected: Bool {
+    @objc open override var isSelected: Bool {
         didSet {
             updateControl(true)
         }
@@ -395,7 +395,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     }
 
     /// update colors when is enabled changed
-    override open var isEnabled: Bool {
+    @objc override open var isEnabled: Bool {
         didSet {
             updateControl()
             updatePlaceholder()
@@ -488,7 +488,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
     /*
     *   Set this value to make the title visible
     */
-    open func setTitleVisible(
+    @objc open func setTitleVisible(
         _ titleVisible: Bool,
         animated: Bool = false,
         animationCompletion: ((_ completed: Bool) -> Void)? = nil
@@ -505,7 +505,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
      Returns whether the title is being displayed on the control.
      - returns: True if the title is displayed on the control, false otherwise.
      */
-    open func isTitleVisible() -> Bool {
+    @objc open func isTitleVisible() -> Bool {
         return hasText || hasErrorMessage || _titleVisible
     }
 

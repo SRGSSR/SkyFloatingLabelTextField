@@ -16,7 +16,7 @@ import UIKit
     - font: Set your icon by setting the font of iconLabel
     - image: Set your icon by setting the image of iconImageView
  */
-public enum IconType: Int {
+@objc public enum IconType: Int {
     case font
     case image
 }
@@ -37,18 +37,18 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
         }
     }
 
-    open var iconType: IconType = .font {
+    @objc open var iconType: IconType = .font {
         didSet {
             updateIconViewHiddenState()
         }
     }
 
     /// A UIImageView value that identifies the view used to display the icon
-    open var iconImageView: UIImageView!
+    @objc open var iconImageView: UIImageView!
 
     /// A UIImage value that determines the image that the icon is using
     @IBInspectable
-    dynamic open var iconImage: UIImage? {
+    @objc dynamic open var iconImage: UIImage? {
         didSet {
             // Show a warning if setting an image while the iconType is IconType.font
             if self.iconType == .font { NSLog("WARNING - Did set iconImage when the iconType is set to IconType.font. The image will not be displayed.") } // swiftlint:disable:this line_length
@@ -57,7 +57,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
     }
 
     /// A UILabel value that identifies the label used to display the icon
-    open var iconLabel: UILabel!
+    @objc open var iconLabel: UILabel!
 
     /// A UIFont value that determines the font that the icon is using
     @objc dynamic open var iconFont: UIFont? {
@@ -68,7 +68,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
 
     /// A String value that determines the text used when displaying the icon
     @IBInspectable
-    open var iconText: String? {
+    @objc open var iconText: String? {
         didSet {
             // Show a warning if setting an icon text while the iconType is IconType.image
             if self.iconType == .image { NSLog("WARNING - Did set iconText when the iconType is set to IconType.image. The icon with the specified text will not be displayed.") } // swiftlint:disable:this line_length
@@ -78,7 +78,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
 
     /// A UIColor value that determines the color of the icon in the normal state
     @IBInspectable
-    dynamic open var iconColor: UIColor = UIColor.gray {
+    @objc dynamic open var iconColor: UIColor = UIColor.gray {
         didSet {
             updateIconLabelColor()
         }
@@ -86,7 +86,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
 
     /// A UIColor value that determines the color of the icon when the control is selected
     @IBInspectable
-    dynamic open var selectedIconColor: UIColor = UIColor.gray {
+    @objc dynamic open var selectedIconColor: UIColor = UIColor.gray {
         didSet {
             updateIconLabelColor()
         }
@@ -94,7 +94,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
 
     /// A float value that determines the width of the icon
     @IBInspectable
-    dynamic open var iconWidth: CGFloat = 20 {
+    @objc dynamic open var iconWidth: CGFloat = 20 {
         didSet {
             updateFrame()
         }
@@ -105,7 +105,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
      Use this value to position the icon more precisely horizontally.
      */
     @IBInspectable
-    dynamic open var iconMarginLeft: CGFloat = 4 {
+    @objc dynamic open var iconMarginLeft: CGFloat = 4 {
         didSet {
             updateFrame()
         }
@@ -116,7 +116,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
      Use this value to position the icon more precisely vertically.
      */
     @IBInspectable
-    dynamic open var iconMarginBottom: CGFloat = 4 {
+    @objc dynamic open var iconMarginBottom: CGFloat = 4 {
         didSet {
             updateFrame()
         }
@@ -127,7 +127,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
      Use this value to rotate the icon in either direction.
      */
     @IBInspectable
-    open var iconRotationDegrees: Double = 0 {
+    @objc open var iconRotationDegrees: Double = 0 {
         didSet {
             iconLabel.transform = CGAffineTransform(rotationAngle: CGFloat(iconRotationDegrees * .pi / 180.0))
             iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(iconRotationDegrees * .pi / 180.0))
@@ -140,7 +140,7 @@ open class SkyFloatingLabelTextFieldWithIcon: SkyFloatingLabelTextField {
      Initializes the control
      - parameter type the type of icon
      */
-    convenience public init(frame: CGRect, iconType: IconType) {
+    @objc convenience public init(frame: CGRect, iconType: IconType) {
         self.init(frame: frame)
         self.iconType = iconType
         updateIconViewHiddenState()
